@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const contactInfo = [
   { 
@@ -28,14 +28,6 @@ const contactInfo = [
 ];
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Message Sent!');
-    setFormData({ name: '', email: '', message: '' });
-  };
-
   return (
     <section id="contact" style={{ padding: '100px 10%' }}>
       <span className="section-comment">// connect.init()</span>
@@ -86,16 +78,19 @@ const Contact = () => {
         <div className="glass-panel" style={{ flex: '1', minWidth: '300px', padding: '40px' }}>
           <h3 style={{ fontSize: '1.5rem', marginBottom: '25px', marginTop: '0', color: '#fff' }}>Send a Message</h3>
           
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <form 
+            action="https://formspree.io/f/mykawnln" 
+            method="POST" 
+            style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
+          >
             
             {/* Name Input */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>Name</label>
               <input 
                 type="text" 
+                name="name" /* <-- Added missing name attribute */
                 placeholder="Your Name" 
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
                 style={{ 
                   padding: '12px 15px', background: 'rgba(0,0,0,0.2)', border: '1px solid var(--border-color)', 
                   borderRadius: '8px', color: '#fff', outline: 'none', fontSize: '0.95rem' 
@@ -109,9 +104,8 @@ const Contact = () => {
               <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>Email</label>
               <input 
                 type="email" 
+                name="email" /* <-- Added missing name attribute */
                 placeholder="your@email.com" 
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
                 style={{ 
                   padding: '12px 15px', background: 'rgba(0,0,0,0.2)', border: '1px solid var(--border-color)', 
                   borderRadius: '8px', color: '#fff', outline: 'none', fontSize: '0.95rem' 
@@ -124,9 +118,8 @@ const Contact = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>Message</label>
               <textarea 
+                name="message" /* <-- Added missing name attribute */
                 placeholder="Your message here..." 
-                value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
                 style={{ 
                   padding: '12px 15px', background: 'rgba(0,0,0,0.2)', border: '1px solid var(--border-color)', 
                   borderRadius: '8px', color: '#fff', outline: 'none', minHeight: '120px', resize: 'vertical', fontSize: '0.95rem' 
